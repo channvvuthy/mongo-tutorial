@@ -4,12 +4,30 @@ import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { ErrorMessages } from 'src/utils/error-message';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(User) private userRepository: Repository<User>
     ) { }
+
+    /**
+     * Creates a new user.
+     *
+     * @param {CreateUserDto} createUserDto - The user data to create.
+     * @return {Promise<User>} The created user.
+     */
+    async create(createUserDto: CreateUserDto): Promise<User> {
+        const user = this.userRepository.create({
+            ...createUserDto,
+            password: await bcrypt.hash(createUserDto.password, 10),
+        });
+
+        return await this.userRepository.save(user);
+    }
+
+
     /**
      * Finds a user by their email.
      *
@@ -23,6 +41,17 @@ export class UserService {
             throw new Error(ErrorMessages.INVALID_CREDENTIAL);
         }
         return user;
+    }
+
+    /**
+     * Checks if the given email exists in the user repository.
+     *
+     * @param {string} email - The email to check.
+     * @return {Promise<boolean>} A boolean indicating if the email exists.
+     */
+    async isEmailExists(email: string): Promise<boolean> {
+        const user = await this.userRepository.findOne({ where: { email } });
+        return user ? true : false
     }
 
     /**
@@ -40,4 +69,8 @@ export class UserService {
         }
         return isPasswordValid;
     }
+
+
 }
+
+
