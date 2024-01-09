@@ -21,11 +21,4 @@ export class AuthController {
         }
     }
 
-    @UseGuards(AuthGuard)
-    @Post('verify-token')
-    verifyToken(@Body('token') token: string) {
-        return this.authService.isTokenValid(token);
-    }
-
-
 }
