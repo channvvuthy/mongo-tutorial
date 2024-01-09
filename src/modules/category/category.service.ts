@@ -11,6 +11,18 @@ export class CategoryService {
     }
 
     /**
+     * Finds all categories with pagination.
+     *
+     * @param {number} page - The page number to retrieve.
+     * @param {number} limit - The number of categories per page.
+     * @return {Promise<Category[]>} A promise that resolves to an array of Category objects.
+     */
+    async findAll(page = 1, limit = 10): Promise<Category[]> {
+        const skip = (page - 1) * limit;
+        return await this.categoryRepository.find({ skip, take: limit });
+    }
+
+    /**
      * Creates a new category.
      *
      * @param {CreateCategoryDto} createUser - The data for creating a category.
