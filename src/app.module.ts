@@ -7,6 +7,7 @@ import { UnitModule } from './modules/unit/unit.module';
 import { BrandModule } from './modules/brand/brand.module';
 import typeOrmConfig from './type-orm.config';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ProductModule } from './modules/product/product.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
     CategoryModule,
     UnitModule,
     BrandModule,
+    ProductModule,
   ],
   controllers: [],
   providers: [],

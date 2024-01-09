@@ -13,8 +13,7 @@ export class Brand {
     @Column()
     icon: string;
 
-    @Column()
-    @IsOptional()
+    @Column({ nullable: true })
     description: string;
 
     @Column({ default: true })

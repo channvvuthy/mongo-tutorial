@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, DefaultValuePipe, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category } from 'src/entities/category.entity';
 import { ApiTags } from '@nestjs/swagger';
+import { PaginateSwagger } from 'src/swagger/paginate.swagger';
 
 @ApiTags('Category')
 @Controller('categories')
@@ -10,6 +11,18 @@ export class CategoryController {
     constructor(
         private readonly categoryService: CategoryService
     ) { }
+
+    @Get('/')
+    @PaginateSwagger()
+    async findAll(
+        @Query('page', ParseIntPipe) page: number,
+        @Query('limit', ParseIntPipe) limit: number,): Promise<any> {
+        try {
+            return await this.categoryService.findAll(page, limit);
+        } catch ({ message }: any) {
+            throw new HttpException(message, HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @Post('/')
     @UsePipes(ValidationPipe)
