@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
 import { UnitModule } from './unit/unit.module';
+import { BrandModule } from './brand/brand.module';
 import typeOrmConfig from './type-orm.config';
 
 @Module({
@@ -15,6 +16,7 @@ import typeOrmConfig from './type-orm.config';
     AuthModule,
     CategoryModule,
     UnitModule,
+    BrandModule,
   ],
   controllers: [AppController],
   providers: [AppService],

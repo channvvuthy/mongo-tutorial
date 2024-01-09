@@ -14,12 +14,12 @@ export class CategoryController {
     /**
      * Creates a new category.
      *
-     * @param {CreateCategoryDto} createUser - The information of the category to create.
+     * @param {CreateCategoryDto} createCategory - The information of the category to create.
      * @return {Promise<Category>} The newly created category.
      */
-    async create(@Body() createUser: CreateCategoryDto): Promise<Category> {
+    async create(@Body() createCategory: CreateCategoryDto): Promise<Category> {
         try {
-            return await this.categoryService.create(createUser);
+            return await this.categoryService.create(createCategory);
         } catch ({ message }: any) {
             throw new HttpException(message, HttpStatus.BAD_REQUEST);
         }
@@ -60,12 +60,12 @@ export class CategoryController {
      * Updates a category with the specified ID.
      *
      * @param {number} id - The ID of the category to update.
-     * @param {CreateCategoryDto} createUser - The data to update the category with.
+     * @param {CreateCategoryDto} createCategory - The data to update the category with.
      * @return {Promise<Category>} A promise that resolves to the updated category.
      */
-    async update(@Param('id') id: number, @Body() createUser: CreateCategoryDto): Promise<Category> {
+    async update(@Param('id') id: number, @Body() createCategory: CreateCategoryDto): Promise<Category> {
         try {
-            return await this.categoryService.updated(id, createUser);
+            return await this.categoryService.updated(id, createCategory);
         } catch ({ message }: any) {
             throw new HttpException(message, HttpStatus.BAD_REQUEST);
         }
