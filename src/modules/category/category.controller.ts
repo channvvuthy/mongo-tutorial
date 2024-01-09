@@ -2,7 +2,9 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, 
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category } from 'src/entities/category.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Category')
 @Controller('categories')
 export class CategoryController {
     constructor(

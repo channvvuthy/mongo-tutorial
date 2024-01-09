@@ -1,19 +1,23 @@
 import { Body, Controller, HttpException, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { ApiTags } from '@nestjs/swagger';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('auth')
+@ApiTags('Auth')
 export class AuthController {
     constructor(private authService: AuthService) { }
 
     @Post('login')
+
     /**
-     * Sign in using the provided sign in DTO.
+     * Sign in with the provided login credentials.
      *
-     * @param {Record<string, any>} signInDto - The sign in DTO containing the email and password.
-     * @return {Promise<any>} A promise that resolves to the result of the sign in operation.
+     * @param {LoginDto} signInDto - The login credentials.
+     * @return {Promise<any>} A promise that resolves with the result of the sign-in operation.
      */
-    async signIn(@Body() signInDto: Record<string, any>) {
+    async signIn(@Body() signInDto: LoginDto): Promise<any> {
         try {
             return await this.authService.signIn(signInDto.email, signInDto.password);
         } catch ({ message }: any) {

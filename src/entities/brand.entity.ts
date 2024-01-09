@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Product } from "./product.entity";
+import { IsOptional } from "class-validator";
 
 @Entity('brands')
 export class Brand {
@@ -13,6 +14,7 @@ export class Brand {
     icon: string;
 
     @Column()
+    @IsOptional()
     description: string;
 
     @Column({ default: true })

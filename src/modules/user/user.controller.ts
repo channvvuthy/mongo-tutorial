@@ -2,8 +2,10 @@ import { Body, Controller, HttpException, HttpStatus, Post, UsePipes, Validation
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UniqueEmailPipe } from './unique-email.pipe';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('users')
+@ApiTags('User')
 export class UserController {
     constructor(
         private readonly userService: UserService

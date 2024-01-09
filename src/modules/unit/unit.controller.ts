@@ -2,8 +2,10 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, 
 import { UnitService } from './unit.service';
 import { CreateUnitDto } from './dto/create-unit.dto';
 import { Unit } from 'src/entities/unit.entity';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('units')
+@ApiTags('Unit')
 export class UnitController {
     constructor(
         private readonly UnitService: UnitService

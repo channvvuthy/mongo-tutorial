@@ -2,7 +2,9 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, 
 import { BrandService } from './brand.service';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { Unit } from 'src/entities/unit.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Brand')
 @Controller('brands')
 export class BrandController {
     constructor(
