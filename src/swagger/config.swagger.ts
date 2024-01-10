@@ -15,6 +15,7 @@ export function configureSwagger(app: INestApplication): void {
         .setTitle('Point of Sale')
         .setDescription('A point of sale (POS) is a place where a customer executes the payment for goods or services and where sales taxes may become payable.')
         .setVersion('1.0')
+        .addBearerAuth()
         .build();
 
     const document = SwaggerModule.createDocument(app, options);
